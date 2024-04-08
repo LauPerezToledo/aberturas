@@ -4,7 +4,7 @@ import 'dart:convert';
 import '../models/Usuario.dart';
 
 class ApiUsuarioController {
-  static final String API_GET = "view_usuario_activos";
+  static final String API_GET = "view_usuario_logins";
   static final String API_LOGIN = "usuario/login";
   static final String USER = "user";
   static final String PASS = "pass";

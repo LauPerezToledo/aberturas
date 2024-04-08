@@ -1,7 +1,7 @@
 class Usuario{
   static const PARAM_IDUSUARIO = "codigo";
   static const PARAM_USUARIO = "nick";
-  static const PARAM_FOTO = "foto";
+  static const PARAM_FOTO = "foto_app";
   static const PARAM_NOMBRE = "nombre";
   static const PARAM_APELLIDO = "apellido";
   static const PARAM_VENDEDOR = "vendedor";
@@ -13,7 +13,7 @@ class Usuario{
   late String _foto;
   late String _nombre;
   late String _apellido;
-  late String _vendedor;
+  late int _vendedor;
   late String _email;
   late String _telefono;
 
@@ -23,7 +23,7 @@ class Usuario{
     _foto="";
     _nombre="";
     _apellido="";
-    _vendedor="";
+    _vendedor=0;
     _email="";
     _telefono="";
   }
@@ -34,7 +34,7 @@ class Usuario{
         _foto = json[PARAM_FOTO] ?? '',
         _nombre = json[PARAM_NOMBRE] ?? '',
         _apellido = json[PARAM_APELLIDO] ?? '',
-        _vendedor = json[PARAM_VENDEDOR] ?? '',
+        _vendedor = json[PARAM_VENDEDOR] ?? 0,
         _email = json[PARAM_EMAIL] ?? '',
         _telefono = json[PARAM_TELEFONO] ?? '';
 
@@ -73,11 +73,11 @@ class Usuario{
 
   String get apellido => _apellido;
 
-  set vendedor(String value){
+  set vendedor(int value){
     _vendedor = value;
   }
 
-  String get vendedor => _vendedor;
+  int get vendedor => _vendedor;
 
   set email (String value){
     _email = value;
