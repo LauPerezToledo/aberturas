@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../usuarios/controllers/ApiUsuarioController.dart';
-import '../usuarios/models/Usuario.dart';
+import 'controllers/ApiUsuarioController.dart';
+import 'models/Usuario.dart';
 
 import 'package:device_info_plus/device_info_plus.dart';
 
@@ -101,8 +101,8 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
                       alignment: Alignment.topCenter,
                       child: Image.network(
                         usuario.foto,
-                        width: 100,
-                        height: 100,
+                        width: 120,
+                        height: 120,
                         fit: BoxFit.contain,
                       ),
                     ),

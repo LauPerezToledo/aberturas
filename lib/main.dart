@@ -1,4 +1,4 @@
-import 'package:aberturas/screens/UsuarioLoginScreen.dart';
+import 'package:aberturas/usuarios/UsuarioLoginScreen.dart';
 import 'package:aberturas/usuarios/controllers/ApiUsuarioController.dart';
 import 'package:aberturas/usuarios/models/Usuario.dart';
 import 'package:flutter/material.dart';
@@ -62,69 +62,98 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body: FutureBuilder<List<Usuario>>(
-      future: _fetchUsuarios(),
-      builder: (BuildContext context, AsyncSnapshot<List<Usuario>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else if (snapshot.hasError) {
-          return Center(
-            child: Text('Error al obtener los usuarios'),
-          );
-        } else {
-        List<Usuario> usuarios = snapshot.data!;
-        return GridView.count(
-          padding: EdgeInsets.all(20.0), // Ajusta el espaciado general de los mosaicos
-          crossAxisSpacing: 10.0, // Ajusta el espaciado horizontal entre los mosaicos
-          mainAxisSpacing: 10.0, // Ajusta el espaciado vertical entre los mosaicos
-          crossAxisCount: 3,
-          children: usuarios.map((usuario) {
-            return GestureDetector(
-             onTap: () {
-              Navigator.push(
-                context,
-                PageRouteBuilder(
-                  transitionDuration: Duration(milliseconds: 800), // Duración de la animación
-                  pageBuilder: (context, animation, secondaryAnimation) => UsuarioLoginScreen(usuario: usuario),
-                  transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                    return FadeTransition(
-                      opacity: animation, // Utiliza el valor de la animación para controlar la opacidad
-                      child: child,
+        appBar: AppBar(
+          title: Text('Aberturas de Aluminio + PVC', textAlign: TextAlign.left,
+              style: TextStyle(fontSize: 20)),
+          backgroundColor: Color(0xFFFBC900)
+          ),
+    body: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+    Padding(
+    padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            Text(
+              'Seleccioná tu usuario',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontFamily: 'SF Pro Display',
+                fontSize: 22,
+              ),
+            ),
+          ],
+        )
+
+    ),
+        Expanded (
+          child:
+          FutureBuilder<List<Usuario>>(
+            future: _fetchUsuarios(),
+            builder: (BuildContext context, AsyncSnapshot<List<Usuario>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error al obtener los usuarios'),
+                );
+              } else {
+                List<Usuario> usuarios = snapshot.data!;
+                return GridView.count(
+                  padding: EdgeInsets.all(20.0), // Ajusta el espaciado general de los mosaicos
+                  crossAxisSpacing: 10.0, // Ajusta el espaciado horizontal entre los mosaicos
+                  mainAxisSpacing: 10.0, // Ajusta el espaciado vertical entre los mosaicos
+                  crossAxisCount: 3,
+                  children: usuarios.map((usuario) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 800), // Duración de la animación
+                            pageBuilder: (context, animation, secondaryAnimation) => UsuarioLoginScreen(usuario: usuario),
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              return FadeTransition(
+                                opacity: animation, // Utiliza el valor de la animación para controlar la opacidad
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      child: Card(
+                        color: Colors.transparent, // Fondo transparente
+                        elevation: 0, // Sin sombra
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0), // Establece el radio del borde
+                        ),
+                        child: SizedBox(
+                          width: 120,
+                          height: 120,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.network(
+                                usuario.foto,
+                                width: 120,
+                                height: 120,),
+                              SizedBox(height: 8.0),
+                              Text(usuario.nombre),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
-                  },
-                ),
-              );
-              },
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0), // Establece el radio del borde
-                  side: BorderSide(color: Colors.grey), // Establece el color del borde
-              ),
-                color: Colors.white,
-                child: SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    Image.network(
-                        usuario.foto,
-                        width: 120,
-                        height: 120,),
-                      SizedBox(height: 8.0),
-                      Text(usuario.nombre),
-                    ],
-                  ),
-                ),
-              ),
-          );
-        }).toList(),
-      );
-    }
-        },
-  ),
+                  }).toList(),
+                );
+              }
+            },
+          ),
+        )
+      ]
+    )
   );
   }
   }
