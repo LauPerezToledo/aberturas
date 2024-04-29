@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../menu/MenuScreen.dart';
 import 'controllers/ApiUsuarioController.dart';
 import 'models/Usuario.dart';
 
@@ -42,10 +43,15 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
       var apiController = ApiUsuarioController.getInstance();
 
       // Llamar al método de inicio de sesión
-      var usuarioLogueado = await apiController.login(usuario, password);
+      var sesion = await apiController.login(usuario, password);
 
       // Iniciar sesión exitosa, hacer algo con el usuario logueado
-      print("Inicio de sesión exitoso: $usuarioLogueado");
+      print("Inicio de sesión exitoso: $sesion");
+      //evaluar si sesion.success = true
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MenuScreen(sesion:sesion)),
+      );
     } catch (e) {
       // Error al iniciar sesión, manejar el error
       print("Error al iniciar sesión: $e");

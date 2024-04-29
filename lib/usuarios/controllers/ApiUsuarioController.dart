@@ -1,6 +1,8 @@
+import 'package:aberturas/usuarios/models/UsuarioLogueado.dart';
 import 'package:http/http.dart' as http;
 import '../../constants.dart';
 import 'dart:convert';
+import '../models/Sesion.dart';
 import '../models/Usuario.dart';
 
 class ApiUsuarioController {
@@ -33,18 +35,20 @@ class ApiUsuarioController {
     }
   }
 
-  Future<Usuario> login(Usuario usuario, String pass) async {
+  Future<Sesion> login(Usuario usuario, String pass) async{
     var url = Uri.parse(Constants.URL + API_LOGIN);
     var body = {USER: usuario.usuario, PASS: pass};
-
     var response = await http.post(url, body: body);
 
     if (response.statusCode == 200) {
+      print (response.body);
       var jsonData = jsonDecode(response.body);
 
       if (jsonData['success'] == true) {
-        print("El usuario se ha logueado correctamente: " +  Usuario.fromJson(jsonData['usuario']).toString());
-        return usuario;
+        Sesion sesion = Sesion.fromJson(jsonData);
+        sesion.objUsuarioLogueado = UsuarioLogueado.fromJson(jsonData['usuario']);
+        print("El usuario se ha logueado correctamente: ");
+        return sesion;
       } else {
         throw Exception('Inicio de sesión fallido');
       }

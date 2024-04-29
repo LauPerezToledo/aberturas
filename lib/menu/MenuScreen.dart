@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../usuarios/models/Sesion.dart';
 import '../usuarios/models/Usuario.dart';
 import 'Item.dart';
 
 class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key, required this.usuario});
-  final Usuario usuario;
+  const MenuScreen({super.key, required this.sesion});
+  final Sesion sesion;
 
 // This widget is the root of your application.
   @override
@@ -17,19 +18,16 @@ class MenuScreen extends StatelessWidget {
           ),
           scaffoldBackgroundColor: Colors.white, // Establece el fondo blanco
         ),
-        home: const _MenuScreen()
+        home:_MenuScreen(sesion: sesion)
     );
   }
 }
 
 
-class _MenuScreen extends StatefulWidget{
-  final List<Item> items = List.generate(8, (index) => "Item $index");
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
+class _MenuScreen extends StatelessWidget{
+  final List<Item> items = [];
+  late Sesion sesion;
+  _MenuScreen({required this.sesion});
 
   @override
   Widget build (BuildContext){
@@ -37,14 +35,14 @@ class _MenuScreen extends StatefulWidget{
       appBar: AppBar (
         title: Text('Aberturas de Aluminio + PVC')
       ),
-      body: ListView.builder(
+      /*body: ListView.builder(
           itemCount: items.length,
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(items[index].nombre),
             );
           }
-      )
-    );
+      )*/
+    body: Text('token: ' + sesion.token));
   }
 }
