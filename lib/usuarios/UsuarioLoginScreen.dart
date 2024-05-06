@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:aberturas/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -77,17 +76,9 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
     }
   }
 
-  /*Future<String> obtenerIdTelefono() async {
-    var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isAndroid) {
-      var androidInfo = await deviceInfo.androidInfo;
-      return androidInfo.androidId; // ID del teléfono Android
-    } else if (Platform.isIOS) {
-      var iosInfo = await deviceInfo.iosInfo;
-      return iosInfo.identifierForVendor; // ID del teléfono iOS
-    }
-    return ''; // Si el dispositivo no es Android ni iOS
-   */
+
+
+
 
 
     @override
@@ -116,7 +107,7 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.amber,
+                          color: Constants.primaryColor,
                           width: 2.0,
                         ),
                         borderRadius: BorderRadius.circular(8.0),
@@ -159,7 +150,7 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
                           child: Text(
                             'Ingresar',
                             style: TextStyle(fontSize: 18, color: Colors
-                                .black87),
+                                .white),
                           ),
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -169,7 +160,7 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
                                   color: Colors
                                       .grey), // Establece un borde gris
                             ),
-                            backgroundColor: Colors.white,
+                            backgroundColor: Constants.primaryColor,
                           ),
                         )
                     ),

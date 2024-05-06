@@ -8,12 +8,6 @@ class Sesion{
   late String _token;
   late bool _success;
 
-  UsuarioLogueado get objUsuarioLogueado => _objUsuarioLogueado;
-
-  set objUsuarioLogueado(UsuarioLogueado value) {
-    _objUsuarioLogueado = value;
-  }
-
 
   Sesion(this._token, this._success);
 
@@ -34,6 +28,12 @@ class Sesion{
 
   set success(bool value) {
     _success = value;
+  }
+
+  UsuarioLogueado get objUsuarioLogueado => _objUsuarioLogueado;
+
+  set objUsuarioLogueado(UsuarioLogueado value) {
+    _objUsuarioLogueado = value;
   }
 }
 

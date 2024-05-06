@@ -3,6 +3,8 @@ import 'package:aberturas/usuarios/controllers/ApiUsuarioController.dart';
 import 'package:aberturas/usuarios/models/Usuario.dart';
 import 'package:flutter/material.dart';
 
+import 'DeviceInfo.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         title: 'Aberturas de Aluminio + PBV',
         theme: ThemeData(
           appBarTheme: AppBarTheme(
-            color: Colors.amber, // Establece el color de la AppBar como amarillo
+            color: Color(0xFFFBC900), // Establece el color de la AppBar como amarillo
           ),
           scaffoldBackgroundColor: Colors.white, // Establece el fondo blanco
         ),
@@ -59,6 +61,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
+  Future<String> getIdDispositivo(){
+    return deviceInfo().getId();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         )
 
-    ),
+    ), FutureBuilder<String>(future: getIdDispositivo(), builder: (BuildContext context, AsyncSnapshot<String> snapshot)
+    {return Text("Dispositivo: " + snapshot.data!);}),
         Expanded (
           child:
           FutureBuilder<List<Usuario>>(
