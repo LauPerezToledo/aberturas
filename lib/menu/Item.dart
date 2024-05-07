@@ -11,6 +11,7 @@ class Item {
   late String _descripcion;
   late int? _padre;
   late String _ruta;
+  late int _idItem;
   late int _orden;
   late String _icono;
 
@@ -45,6 +46,12 @@ class Item {
 
   set ruta(String value) {
     _ruta = value;
+  }
+
+  int get idItem => _idItem;
+
+  set idItem(int value) {
+    _idItem = value;
   }
 
   int get orden => _orden;
