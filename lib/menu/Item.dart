@@ -1,9 +1,15 @@
 class Item {
+  static const PARAM_IDMENU = "idmenu";
+  static const PARAM_DESCRIPCION = "descripcion";
+  static const PARAM_PADRE = "padre";
+  static const PARAM_RUTA = "ruta";
+  static const PARAM_IDITEM = "iditem";
+  static const PARAM_ORDEN = "orden";
+  static const PARAM_ICONO = "icono";
 
   late int _idMenu;
   late String _descripcion;
   late int? _padre;
-
   late String _ruta;
   late int _orden;
   late String _icono;

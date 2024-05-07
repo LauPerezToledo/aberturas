@@ -8,7 +8,7 @@ class Sesion{
   late UsuarioLogueado _objUsuarioLogueado;
   late String _token;
   late bool _success;
-  late List<Item> _items = [];
+  late List<Item> _items;
 
 
   Sesion(this._token, this._success, this._items);
