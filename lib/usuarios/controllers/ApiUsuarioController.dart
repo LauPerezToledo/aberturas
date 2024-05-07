@@ -41,7 +41,7 @@ class ApiUsuarioController {
     var response = await http.post(url, body: body);
 
     if (response.statusCode == 200) {
-      print (response.body);
+      //print (response.body);
       var jsonData = jsonDecode(response.body);
 
       if (jsonData['success'] == true) {

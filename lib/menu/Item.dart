@@ -1,25 +1,25 @@
 class Item {
 
-  late String _idMenu;
+  late int _idMenu;
   late String _descripcion;
-  late int _padre;
+  late int? _padre;
 
   late String _ruta;
   late int _orden;
   late String _icono;
 
   Item() {
-    _idMenu = "";
-    _descripcion = "";
-    _padre = 0;
-    _ruta = "";
+    _idMenu = 1;
+    _descripcion = "materiales";
+    _padre = null;
+    _ruta = "/materiales";
     _orden = 0;
-    _icono = "";
+    _icono = "document_scanner";
   }
 
-  String get idMenu => _idMenu;
+  int get idMenu => _idMenu;
 
-  set idMenu(String value) {
+  set idMenu(int value) {
     _idMenu = value;
   }
 
@@ -29,9 +29,9 @@ class Item {
     _descripcion = value;
   }
 
-  int get padre => _padre;
+  int? get padre => _padre;
 
-  set padre(int value) {
+  set padre(int? value) {
     _padre = value;
   }
 

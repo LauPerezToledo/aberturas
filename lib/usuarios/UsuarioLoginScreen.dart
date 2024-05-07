@@ -43,7 +43,7 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
 
       // Llamar al método de inicio de sesión
       var sesion = await apiController.login(usuario, password);
-
+      print(sesion);
       // Iniciar sesión exitosa, hacer algo con el usuario logueado
       print("Inicio de sesión exitoso: $sesion");
       //evaluar si sesion.success = true

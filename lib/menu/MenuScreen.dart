@@ -1,40 +1,13 @@
 import 'package:flutter/material.dart';
 import '../Constants.dart';
 import '../usuarios/models/Sesion.dart';
+
 import 'Item.dart';
-import 'ApiMenuController.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key, required this.sesion}) ;
   final Sesion sesion;
 
-
-  @override
-  _MenuScreenState createState() => _MenuScreenState();
-}
-
-class _MenuScreenState extends State<MenuScreen> {
-  late List<Item> items;
-
-  @override
-  void initState() {
-    super.initState();
-    // Llama al método para obtener el menú al iniciar la pantalla
-    getMenu();
-  }
-
-  Future<void> getMenu() async {
-    try {
-      // Llama al método getMenu de tu clase controladora y pasa el token de sesión
-      final menuItems = await ApiMenuController.getMenu(widget.sesion);
-      setState(() {
-        items = menuItems.cast<Item>();
-      });
-    } catch (e) {
-      // Maneja los errores si ocurre algún problema al obtener el menú
-      print('Error al obtener el menú: $e');
-    }
-  }
 
 // This widget is the root of your application.
   @override
@@ -47,14 +20,19 @@ class _MenuScreenState extends State<MenuScreen> {
           ),
           scaffoldBackgroundColor: Colors.white, // Establece el fondo blanco
         ),
-        home:_MenuScreen(sesion: widget.sesion)
+        home:_MenuScreen(sesion: sesion)
     );
 
+  }
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
 
 class _MenuScreen extends StatelessWidget{
-  final List<Item> items = [];
   late Sesion sesion;
   _MenuScreen({required this.sesion});
 
@@ -62,14 +40,28 @@ class _MenuScreen extends StatelessWidget{
   Widget build (BuildContext) {
     return Scaffold(
         appBar: AppBar(
-            title: Text('Aberturas de Aluminio + PVC')
+            title: Text('Aberturas de Aluminio + PVC'),
+            leading: IconButton(
+             icon: Icon(Icons.menu), // Icono de las tres barras
+             onPressed: () {
+             // Lógica para abrir el menú
+             },
+             ),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.person), // Icono de sesión
+                onPressed: () {
+                // Lógica para manejar la sesión
+                },
+    ),
+    ],
         ),
         body: ListView.builder(
-            itemCount: items.length,
+            itemCount: sesion.items.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text(items[index].descripcion),
-                trailing: Icon(items[index].icono as IconData?),
+                title: Text(sesion.items[index].descripcion),
+                trailing: Icon(sesion.items[index].icono as IconData?),
               );
 
             }
