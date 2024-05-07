@@ -2,6 +2,7 @@ import 'package:aberturas/usuarios/models/UsuarioLogueado.dart';
 import 'package:http/http.dart' as http;
 import '../../Constants.dart';
 import 'dart:convert';
+import '../../menu/Item.dart';
 import '../models/Sesion.dart';
 import '../models/Usuario.dart';
 
@@ -47,6 +48,7 @@ class ApiUsuarioController {
       if (jsonData['success'] == true) {
         Sesion sesion = Sesion.fromJson(jsonData);
         sesion.objUsuarioLogueado = UsuarioLogueado.fromJson(jsonData['usuario']);
+        List<Item> items = sesion.items;
         print("El usuario se ha logueado correctamente: ");
         return sesion;
       } else {
