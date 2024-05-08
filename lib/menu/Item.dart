@@ -29,7 +29,7 @@ class Item {
   Item.fromJson(Map<String, dynamic> json)
       : _idMenu = json[PARAM_IDMENU] ?? 0,
         _descripcion = json[PARAM_DESCRIPCION] ?? '',
-        _padre = json[PARAM_PADRE] ?? '',
+        _padre = json[PARAM_PADRE] != null ? json[PARAM_PADRE] as int : null,
         _ruta = json[PARAM_RUTA] ?? '',
         _idItem = json[PARAM_IDITEM] ?? 0,
         _orden = json[PARAM_ORDEN] ?? 0,
@@ -39,6 +39,7 @@ class Item {
   String toString() {
     return "ID Menu: $_idMenu | Descripción: $_descripcion | Padre: $_padre | ID Item: $_idItem | Orden: $_orden | Ícono: $_icono";
   }
+
   int get idMenu => _idMenu;
 
   set idMenu(int value) {

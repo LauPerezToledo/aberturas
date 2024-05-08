@@ -1,36 +1,28 @@
-import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../menu/Item.dart';
 import 'UsuarioLogueado.dart';
 
-class Sesion{
+class Sesion {
+  static const PARAM_TOKEN = "token";
+  static const PARAM_SUCCESS = "success";
+  static const PARAM_MENU = "menu";
+
   late UsuarioLogueado _objUsuarioLogueado;
   late String _token;
   late bool _success;
   late List<Item> _items;
 
+  Sesion(this._token, this._success, this._items, this._objUsuarioLogueado);
 
-  Sesion(this._token, this._success, this._items);
-
-  factory Sesion.fromJson(Map<String, dynamic> json) {
-    return Sesion(
-      json['token'],
-      json['success'],
-      json['items'],
-    );
-  }
+  Sesion.fromJson(Map<String, dynamic> json)
+      : _token = json[PARAM_TOKEN] ?? '',
+        _success = json[PARAM_SUCCESS] ?? false,
+        _items = (json[PARAM_MENU] as List<dynamic>).map((itemJson) => Item.fromJson(itemJson)).toList(),
+        _objUsuarioLogueado = UsuarioLogueado.fromJson(json['usuario']);
 
   String get token => _token;
 
   set token(String value) {
     _token = value;
-  }
-
-  bool get success => _success;
-
-  set success(bool value) {
-    _success = value;
   }
 
   UsuarioLogueado get objUsuarioLogueado => _objUsuarioLogueado;
@@ -44,5 +36,12 @@ class Sesion{
   set items(List<Item> value) {
     _items = value;
   }
+
+  bool get success => _success;
+
+  set success(bool value) {
+    _success = value;
+  }
 }
+
 
