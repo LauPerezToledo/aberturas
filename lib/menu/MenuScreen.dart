@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../usuarios/models/Sesion.dart';
+import 'Item.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({Key? key, required this.sesion}) : super(key: key);
@@ -33,11 +34,11 @@ class _MenuScreenState extends State<MenuScreen> {
         body: ListView.builder(
           itemCount: widget.sesion.items.length,
           itemBuilder: (context, index) {
-            final item = widget.sesion.items[index];
+            Item item = Item();
             return Card(
               child: ListTile(
                 title: Text(item.descripcion),
-                leading: Icon(_getIconData(item.icono)),
+                trailing: Icon(_getIconData(item.icono)),
                 onTap: () {
                   // Lógica para manejar el tap en la tarjeta
                 },
@@ -63,7 +64,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
   IconData _getIconData(String iconName) {
     switch (iconName) {
-      case 'documentScanner':
+      case 'document_scanner':
         return Icons.document_scanner;
       case 'access_alarm':
         return Icons.access_alarm;
