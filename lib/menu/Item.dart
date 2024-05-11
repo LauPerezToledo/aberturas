@@ -18,7 +18,7 @@ class Item {
 
   Item() {
     _idMenu = 1;
-    _descripcion = "materiales";
+    _descripcion = "Materiales";
     _padre = null;
     _ruta = "/materiales";
     _idItem = 88;

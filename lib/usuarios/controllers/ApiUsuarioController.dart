@@ -45,7 +45,7 @@ class ApiUsuarioController {
       //print (response.body);
       var jsonData = jsonDecode(response.body);
 
-      if (jsonData['success'] == true) {
+      if (jsonData['success']) {
         print("El usuario se ha logueado correctamente: $jsonData");
         Sesion sesion = Sesion.fromJson(jsonData);
         sesion.objUsuarioLogueado = UsuarioLogueado.fromJson(jsonData['usuario']);
@@ -60,4 +60,19 @@ class ApiUsuarioController {
       throw Exception('Error: ${response.statusCode}');
     }
   }
+
+  Future<List<Item>> getItems() async {
+    var url = Uri.parse(Constants.URL + API_GET);
+
+    var response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      var jsonData = jsonDecode(response.body) as List<dynamic>;
+      List<Item> items = jsonData.map((json) => Item.fromJson(json)).toList();
+      return items;
+    } else {
+      throw Exception('Error: ${response.statusCode}');
+    }
+  }
+
 }

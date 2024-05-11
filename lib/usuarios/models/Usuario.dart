@@ -7,6 +7,7 @@ class Usuario{
   static const PARAM_VENDEDOR = "vendedor";
   static const PARAM_EMAIL = "administrador@aberturas.com.ar";
   static const PARAM_TELEFONO = "telefono";
+  static const PARAM_CAMBIOCONTRASENIA = "cambioContrasenia";
 
   late int _idusuario;
   late String _usuario;
@@ -16,6 +17,7 @@ class Usuario{
   late int _vendedor;
   late String _email;
   late String _telefono;
+  late bool _cambioContrasenia;
 
   Usuario(){
     _idusuario=0;
@@ -26,6 +28,7 @@ class Usuario{
     _vendedor=0;
     _email="";
     _telefono="";
+    _cambioContrasenia=false;
   }
 
   Usuario.fromJson(Map<String, dynamic> json)
@@ -36,7 +39,8 @@ class Usuario{
         _apellido = json[PARAM_APELLIDO] ?? '',
         _vendedor = json[PARAM_VENDEDOR] ?? 0,
         _email = json[PARAM_EMAIL] ?? '',
-        _telefono = json[PARAM_TELEFONO] ?? '';
+        _telefono = json[PARAM_TELEFONO] ?? '',
+        _cambioContrasenia = json[PARAM_CAMBIOCONTRASENIA] ?? false;
 
   @override
   String toString() {
@@ -90,5 +94,11 @@ class Usuario{
   }
 
   String get telefono => _telefono;
+
+  bool get cambioContrasenia => _cambioContrasenia;
+
+  set cambioContrasenia(bool value) {
+    _cambioContrasenia = value;
+  }
 }
 

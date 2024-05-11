@@ -6,8 +6,6 @@ import '../menu/MenuScreen.dart';
 import 'controllers/ApiUsuarioController.dart';
 import 'models/Usuario.dart';
 
-import 'package:device_info_plus/device_info_plus.dart';
-
 class UsuarioLoginScreen extends StatefulWidget {
   final Usuario usuario;
 

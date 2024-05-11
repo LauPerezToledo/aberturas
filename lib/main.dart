@@ -91,8 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         )
 
-    ), FutureBuilder<String>(future: getIdDispositivo(), builder: (BuildContext context, AsyncSnapshot<String> snapshot)
-    {return Text("Dispositivo: " + snapshot.data!);}),
+    ),
         Expanded (
           child:
           FutureBuilder<List<Usuario>>(
