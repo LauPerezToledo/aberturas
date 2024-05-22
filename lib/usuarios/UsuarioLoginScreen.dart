@@ -90,13 +90,22 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
                   children: [
                     Align(
                       alignment: Alignment.topCenter,
-                      child: Image.network(
+                    ),
+                    if (Uri.tryParse(usuario.foto)?.isAbsolute ?? false) // Verifica si la foto es una URL válida
+                      Image.network(
                         usuario.foto,
                         width: 120,
                         height: 120,
-                        fit: BoxFit.contain,
+                        errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                          // Manejar el error aquí
+                          print('Error al cargar la imagen: $error');
+                          return Image.asset(
+                            'assets/usuario_vacio.jpg', // Ruta de la imagen predeterminada
+                            width: 120,
+                            height: 120,
+                          );
+                        },
                       ),
-                    ),
                     SizedBox(height: 16.0),
                     Container(
                       decoration: BoxDecoration(

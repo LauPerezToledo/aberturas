@@ -2,6 +2,7 @@ import '../../menu/Item.dart';
 import 'UsuarioLogueado.dart';
 
 class Sesion {
+
   static const PARAM_TOKEN = "token";
   static const PARAM_SUCCESS = "success";
   static const PARAM_MENU = "menu";
@@ -16,7 +17,7 @@ class Sesion {
   Sesion.fromJson(Map<String, dynamic> json)
       : _token = json[PARAM_TOKEN] ?? '',
         _success = json[PARAM_SUCCESS] ?? false,
-        _items = (json[PARAM_MENU] as List<dynamic>).map((itemJson) => Item.fromJson(itemJson)).toList(),
+        //_items = (json[PARAM_MENU] as List<dynamic>).map((itemJson) => Item.fromJson(itemJson)).toList(),
         _objUsuarioLogueado = UsuarioLogueado.fromJson(json['usuario']);
 
   String get token => _token;
