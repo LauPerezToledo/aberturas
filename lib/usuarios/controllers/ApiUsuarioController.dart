@@ -42,37 +42,43 @@ class ApiUsuarioController {
     var body = {USER: usuario.usuario, PASS: pass};
     var response = await http.post(url, body: body);
     if (response.statusCode == 200) {
-      //print (response.body);
+      print(response.body);
       var jsonData = jsonDecode(response.body);
 
       if (jsonData['success']) {
         print("El usuario se ha logueado correctamente: $jsonData");
         Sesion sesion = Sesion.fromJson(jsonData);
         sesion.objUsuarioLogueado = UsuarioLogueado.fromJson(jsonData['usuario']);
+
+        List<dynamic> menu = jsonData['menu'];
+        List<Item> listado_menu = menu.map((json) => Item.fromJson(json['item'])).toList();
+        sesion.items = listado_menu;
+
+        print("cantidad de items recibidos " + sesion.items.length.toString());
+        if(sesion.items.length>0) {
+          print(sesion.items[0].descripcion);
+        }
         return sesion;
       } else {
-
         throw Exception('Inicio de sesión fallido');
-
       }
     } else {
-
       throw Exception('Error: ${response.statusCode}');
     }
   }
+  /*
+    Future<List<Item>> getItems() async {
+      var url = Uri.parse(Constants.URL + API_GET);
 
-  Future<List<Item>> getItems() async {
-    var url = Uri.parse(Constants.URL + API_GET);
+      var response = await http.get(url);
 
-    var response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      var jsonData = jsonDecode(response.body) as List<dynamic>;
-      List<Item> items = jsonData.map((json) => Item.fromJson(json)).toList();
-      return items;
-    } else {
-      throw Exception('Error: ${response.statusCode}');
-    }
-  }
+      if (response.statusCode == 200) {
+        var jsonData = jsonDecode(response.body) as List<dynamic>;
+        List<Item> items = jsonData.map((json) => Item.fromJson(json)).toList();
+        return items;
+      } else {
+        throw Exception('Error: ${response.statusCode}');
+      }
+  }*/
 
 }

@@ -32,6 +32,14 @@ class _UsuarioLoginScreenState extends State<UsuarioLoginScreen> {
     contrasenaFocusNode.requestFocus();
   }
 
+  void onLoginSuccess(){
+
+  }
+
+  void onLoginError(){
+
+  }
+
   // Método para manejar el inicio de sesión
   void _iniciarSesion(BuildContext context, Usuario usuario,
       String password) async {

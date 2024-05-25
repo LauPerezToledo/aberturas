@@ -17,13 +17,14 @@ class Item {
 
 
   Item() {
+    /*
     _idMenu = 1;
     _descripcion = "Materiales";
     _padre = null;
     _ruta = "/materiales";
     _idItem = 88;
     _orden = 0;
-    _icono = "document_scanner";
+    _icono = "document_scanner";*/
   }
 
   Item.fromJson(Map<String, dynamic> json)
