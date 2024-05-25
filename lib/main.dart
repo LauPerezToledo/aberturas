@@ -58,7 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
       print(error);
       return [];
     }
-
   }
 
   Future<String> getIdDispositivo(){
@@ -141,10 +140,21 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.network(
-                                usuario.foto,
-                                width: 120,
-                                height: 120,),
+                              if (Uri.tryParse(usuario.foto)?.isAbsolute ?? false) // Verifica si la foto es una URL válida
+                                Image.network(
+                                  usuario.foto,
+                                  width: 100,
+                                  height: 100,
+                                  errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                                    // Manejar el error aquí
+                                    print('Error al cargar la imagen: $error');
+                                    return Image.asset(
+                                      'assets/usuario_vacio.jpg', // Ruta de la imagen predeterminada
+                                      width: 100,
+                                      height: 100,
+                                    );
+                                  },
+                                ),
                               SizedBox(height: 8.0),
                               Text(usuario.nombre),
                             ],

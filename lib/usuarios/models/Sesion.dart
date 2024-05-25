@@ -2,6 +2,7 @@ import '../../menu/Item.dart';
 import 'UsuarioLogueado.dart';
 
 class Sesion {
+
   static const PARAM_TOKEN = "token";
   static const PARAM_SUCCESS = "success";
   static const PARAM_MENU = "menu";
